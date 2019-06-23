@@ -1,0 +1,61 @@
+.panel-primary {
+  margin-top: 60px;
+}
+
+.panel {
+  text-align: center;
+}
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg 
+	{
+		font-size: 3.5rem;
+	}
+}
+
+.lh-condensed { 
+	line-height: 1.25; 
+}
+
+.table-hover > tbody > tr:hover {
+	background-color: #f2f2d2;
+}
+
+.badge-light {
+	color: #ffffff;
+	background-color: #208400;
+}
+
+.green {
+	color: #00ff00;
+}
+
+.grey {
+	color: #bebebe;
+}
+
+.blue {
+	color: #0000ff;
+}
+
+.red {
+	color: #ff0000;
+}
+
+#error {
+	z-index: 1080;
+}
+
+.error {
+	background-color: #ff0000;
+	color: #ffffff;
+}
