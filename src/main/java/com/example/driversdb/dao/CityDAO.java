@@ -1,13 +1,24 @@
 package com.example.driversdb.dao;
 
 import com.example.driversdb.ConnectionManager;
+import com.example.driversdb.MyLogger;
 import com.example.driversdb.entity.City;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * City Model DAO Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
 
 public class CityDAO {
+
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     static Connection conn = null;
     static ResultSet rs = null;
@@ -25,7 +36,7 @@ public class CityDAO {
                 cities.add(new City(rs.getInt("id"), rs.getString("name")));
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return cities;
     }
@@ -42,10 +53,10 @@ public class CityDAO {
             if (rs.next()) {
                 city = Optional.of(new City(rs.getInt("id"), rs.getString("name")));
             } else {
-                System.out.println("Город с ID = " + id + " не найдён в базе!");
+//                System.out.println("Город с ID = " + id + " не найдён в базе!");
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return city;
     }
@@ -61,15 +72,12 @@ public class CityDAO {
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(searchQuery);
             while (rs.next()) {
-                System.out.println("adding...");
                 cities.add(new City(rs.getInt("id"), rs.getString("name")));
             }
-            if (cities.size() == 0) System.out.println("Города с названием " + name + " не найдёны в базе!");
+//            if (cities.size() == 0) System.out.println("Города с названием " + name + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return cities;
     }
-
-
 }

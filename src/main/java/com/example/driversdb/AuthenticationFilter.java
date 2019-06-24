@@ -12,6 +12,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+/**
+ * Authentication Filter Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
+
 @WebFilter(urlPatterns = { "*.jsp","/DbSearch"})
 public class AuthenticationFilter implements Filter {
 

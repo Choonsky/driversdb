@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" media="all" href="../css/font-awesome.css">
     <link rel="stylesheet" type="text/css" media="all" href="../css/styles.css">
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/driversdb-ajax.js"></script>
 </head>
 <body class="bg-light">
 

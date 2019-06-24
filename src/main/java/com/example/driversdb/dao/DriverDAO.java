@@ -1,13 +1,24 @@
 package com.example.driversdb.dao;
 
 import com.example.driversdb.ConnectionManager;
+import com.example.driversdb.MyLogger;
 import com.example.driversdb.entity.Driver;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Driver Model DAO Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
 
 public class DriverDAO {
+
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     static Connection conn = null;
     static ResultSet rs = null;
@@ -26,7 +37,7 @@ public class DriverDAO {
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -44,10 +55,10 @@ public class DriverDAO {
                 driver = Optional.of(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             } else {
-                System.out.println("Водитель с ID = " + id + " не найдён в базе!");
+//                System.out.println("Водитель с ID = " + id + " не найдён в базе!");
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return driver;
     }
@@ -65,9 +76,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы из города с ID " + cityId + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы из города с ID " + cityId + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -85,9 +96,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -105,9 +116,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с фамилией " + familyName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с фамилией " + familyName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -125,9 +136,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с отчеством " + secondName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с отчеством " + secondName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -146,9 +157,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " и отчеством " + secondName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " и отчеством " + secondName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -167,9 +178,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " и фамилией " + familyName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + " и фамилией " + familyName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -188,9 +199,9 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с отчеством " + secondName + " и фамилией " + familyName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с отчеством " + secondName + " и фамилией " + familyName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }
@@ -209,10 +220,10 @@ public class DriverDAO {
                 drivers.add(new Driver(rs.getInt("id"), rs.getString("family_name"), rs.getString("first_name"),
                         rs.getString("second_name"), rs.getInt("id_city")));
             }
-            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + ", отчеством " + secondName +
-                        " и фамилией " + familyName + " не найдёны в базе!");
+//            if (drivers.size() == 0) System.out.println("Владельцы с именем " + firstName + ", отчеством " + secondName +
+//                        " и фамилией " + familyName + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return drivers;
     }

@@ -2,6 +2,12 @@ package com.example.driversdb.entity;
 
 import java.util.Objects;
 
+/**
+ * Driver Model Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
+
 public class Driver {
 
     private int id;

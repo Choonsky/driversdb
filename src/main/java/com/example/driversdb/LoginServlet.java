@@ -3,9 +3,6 @@ package com.example.driversdb;
 import com.example.driversdb.dao.UserDAO;
 import com.example.driversdb.entity.User;
 
-import java.io.PrintWriter;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,15 +11,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Cookie;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- * Servlet implementation class LoginServlet
+ * Login servlet
+ *
+ * @author Stanislav Nemirovsky
  */
+
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 448163813744079388L;
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, java.io.IOException {
+
+        MyLogger.init();
 
         try {
 
@@ -34,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 
             if (user.isValid()) {
 
+                LOGGER.log( Level.INFO, "Вошёл в систему пользователь " + user);
                 HttpSession oldSession = request.getSession(false);
                 if (oldSession != null) {
                     oldSession.invalidate();
@@ -50,10 +58,11 @@ public class LoginServlet extends HttpServlet {
                 }
                 response.sendRedirect("index.jsp"); //logged-in page
             } else {
+                LOGGER.log( Level.INFO, "Не удалось войти в систему пользователю " + user);
                 response.sendRedirect("login.jsp?failed=true");
             }
         } catch (Throwable e) {
-            System.out.println("EXCEPTION::" + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
     }
 }

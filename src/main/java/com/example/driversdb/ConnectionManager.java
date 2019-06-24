@@ -1,8 +1,18 @@
 package com.example.driversdb;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Connection manager object
+ *
+ * @author Stanislav Nemirovsky
+ */
 
 public class ConnectionManager {
+
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     private static Connection connection;
     private final static String url = "jdbc:postgresql://localhost:5432/driversdb";
@@ -11,18 +21,19 @@ public class ConnectionManager {
 
     public static Connection Connect() {
 
-            try {
+        MyLogger.init();
+
+        try {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException e) {
-                System.out.println("Not on the classpath!");
+            LOGGER.log( Level.SEVERE, "Не найден драйвер БД!");
             }
 
             try {
                 connection = DriverManager.getConnection(url, user, password);
-                System.out.println("Connected to the PostgreSQL server successfully.");
+                LOGGER.log( Level.INFO, "Подключение к БД произведено!");
             } catch (SQLException e) {
-                System.out.println("Connection failure.");
-                e.printStackTrace();
+                LOGGER.log( Level.SEVERE, "Не удалось подключиться к БД!" + e.toString(), e);
             }
 
         return connection;

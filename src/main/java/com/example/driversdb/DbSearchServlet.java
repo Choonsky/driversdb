@@ -16,14 +16,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+/**
+ * Main DB search servlet
+ *
+ * @author Stanislav Nemirovsky
+ */
 
 @WebServlet("/DbSearch")
 public class DbSearchServlet extends HttpServlet {
 
     private static final long serialVersionUID = -744079388448163813L;
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
+
+        MyLogger.init();
 
         CarDAO carDAO = new CarDAO();
         CityDAO cityDAO = new CityDAO();
@@ -98,7 +108,7 @@ public class DbSearchServlet extends HttpServlet {
         if (result.size() == 0 || result == null) {
             out.println("<h3 style=\"color:red;\">РЕЗУЛЬТАТЫ НЕ НАЙДЕНЫ</h3>");
         } else {
-            out.println("<table border=1><thead><tr><th>Фамилия<th>Имя<th>Отчество<th>Город<th>Авто<th>Модель<th>Госномер</tr></thead><tbody><tr>");
+            out.println("<table class=\"table table-hover table-sm\"><thead class =\"thead-dark\"><tr><th>Фамилия<th>Имя<th>Отчество<th>Город<th>Авто<th>Модель<th>Госномер</tr></thead><tbody><tr>");
             result.forEach(driver -> {
                 ArrayList<Car> cars = carDAO.findCarsByDriverId(driver.getId());
                 String rowspan = "";

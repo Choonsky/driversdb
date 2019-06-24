@@ -1,13 +1,24 @@
 package com.example.driversdb.dao;
 
 import com.example.driversdb.ConnectionManager;
+import com.example.driversdb.MyLogger;
 import com.example.driversdb.entity.Car;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Car Model DAO Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
 
 public class CarDAO {
+
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
 
     static Connection conn = null;
     static ResultSet rs = null;
@@ -25,7 +36,7 @@ public class CarDAO {
                         rs.getString("plate"), rs.getInt("id_driver")));
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return cars;
     }
@@ -42,10 +53,10 @@ public class CarDAO {
                 car = Optional.of(new Car(rs.getInt("id"), rs.getString("type"), rs.getString("model"),
                         rs.getString("plate"), rs.getInt("id_driver")));
             } else {
-                System.out.println("Автомобиль с ID = " + id + " не найдён в базе!");
+//                System.out.println("Автомобиль с ID = " + id + " не найдён в базе!");
             }
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return car;
     }
@@ -62,9 +73,9 @@ public class CarDAO {
                 cars.add(new Car(rs.getInt("id"), rs.getString("type"), rs.getString("model"),
                         rs.getString("plate"), rs.getInt("id_driver")));
             }
-            if (cars.size() == 0) System.out.println("Автомобили с номером " + plate + " не найдёны в базе!");
+//            if (cars.size() == 0) System.out.println("Автомобили с номером " + plate + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return cars;
     }
@@ -81,11 +92,10 @@ public class CarDAO {
                 cars.add(new Car(rs.getInt("id"), rs.getString("type"), rs.getString("model"),
                         rs.getString("plate"), rs.getInt("id_driver")));
             }
-            if (cars.size() == 0) System.out.println("Автомобили с ID владельца " + driverId + " не найдёны в базе!");
+//            if (cars.size() == 0) System.out.println("Автомобили с ID владельца " + driverId + " не найдёны в базе!");
         } catch (Exception e) {
-            System.out.println("Что-то пошло не так! " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
         return cars;
     }
-
 }

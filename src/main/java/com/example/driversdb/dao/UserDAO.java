@@ -1,16 +1,29 @@
 package com.example.driversdb.dao;
 
 import com.example.driversdb.ConnectionManager;
+import com.example.driversdb.MyLogger;
 import com.example.driversdb.entity.User;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class UserDAO
-{
+/**
+ * User Model DAO Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
+
+public class UserDAO {
+
+    private final static Logger LOGGER = Logger.getLogger(MyLogger.class.getName());
+
     static Connection conn = null;
     static ResultSet rs = null;
 
     public static User login(User user) {
+
+        MyLogger.init();
 
         Statement stmt;
 
@@ -31,16 +44,14 @@ public class UserDAO
             boolean isResponse = rs.next();
 
             if (!isResponse) {
-                System.out.println("Такой пользователь не зарегистрирован!");
                 user.setValid(false);
             } else {
                 String fullname = rs.getString("fullname");
-                System.out.println("Вошёл пользователь " + fullname);
                 user.setFullname(fullname);
                 user.setValid(true);
             }
         } catch (Exception e) {
-            System.out.println("Аутентификация не удалась, исключение: " + e);
+            LOGGER.log( Level.SEVERE, e.toString(), e);
         }
 
         return user;

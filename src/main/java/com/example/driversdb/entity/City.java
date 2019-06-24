@@ -2,6 +2,12 @@ package com.example.driversdb.entity;
 
 import java.util.Objects;
 
+/**
+ * City Model Object.
+ *
+ * @author Stanislav Nemirovsky
+ */
+
 public class City {
 
     private int id;
